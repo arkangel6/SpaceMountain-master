@@ -9,6 +9,8 @@ public class ObjectManager {
 	long treeTimer = 0;
 	int treeSpawnTime = 1000;
 
+	private int score = 0;
+
 	public ObjectManager() {
 		objects = new ArrayList<GameObject>();
 	}
@@ -41,4 +43,11 @@ public class ObjectManager {
 		}
 	}
 
+	public void setScore(int s) {
+		score = s;
+	}
+
+	public int getScore() {
+		return score;
+	}
 }

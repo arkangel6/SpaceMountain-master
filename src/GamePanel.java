@@ -18,7 +18,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	int y1 = 0;
 	int y2 = 500;
 	int x = 0;
-
+	int score;
 	// Unicorn unicorn = new Unicorn(150, 40 ,50,50);
 	ObjectManager manager;
 	// GamePanel
@@ -80,7 +80,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 			// y1+=scrollSpeed;
 			// y2+=scrollSpeed;
+			if (yvel >= 4) {
+				// sets max speed at 4
+				y1 += 4;
+				y2 += 4;
+				yvel = 4;
 
+			}
+			// System.out.println(yvel);
 		}
 		repaint();
 	}
@@ -103,6 +110,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			// Unicorn.update("space");
 			yvel = 1;
 			System.out.println("space");
+
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			if (x >= 5) {
