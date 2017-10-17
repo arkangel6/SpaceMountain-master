@@ -7,7 +7,12 @@ public class ObjectManager {
 	ArrayList<GameObject> objects;
 
 	long treeTimer = 0;
-	int treeSpawnTime = 1000;
+	
+	
+	
+		int treeSpawnTime = 1500;
+
+	static boolean slow2 = false;
 
 	private int score = 0;
 
@@ -37,8 +42,20 @@ public class ObjectManager {
 	}
 
 	public void manageTrees() {
+		if(slow2) {
+			treeSpawnTime = 3000;
+		}
+		else {
+			treeSpawnTime = 1500;
+		}
+		
 		if (System.currentTimeMillis() - treeTimer >= treeSpawnTime) {
-			addObject(new Trees(new Random().nextInt(SpaceMountain.width), 500, 50, 50));
+			int r = new Random().nextInt(SpaceMountain.width);
+			addObject(new Trees(r, 500, 50, 50));
+			addObject(new Trees(r+50, 500, 50, 50));
+			addObject(new Trees(r-50, 500, 50, 50));
+			
+			
 			treeTimer = System.currentTimeMillis();
 		}
 	}

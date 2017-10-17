@@ -3,21 +3,32 @@ import java.awt.Graphics;
 public class Trees extends GameObject {
 	double yvel = 0;
 	double gravity = 0.01;
-
+	static boolean slow = false;
 	public Trees(int x, int y, int width, int height) {
 		super(x, y, width, height);
 	}
-
+	int y = 500;
 	void update() {
+		
+		 
+		
+		 if(slow) {
+		 	y = y -1;
+		 }
+		 else {
+			 y = y-3; 
+		 
+		 }
+		
+		System.out.println(y);
 
-		y = 500;
+		/*
 		y -= yvel;
-		yvel += gravity;
+		y += gravity;
 		gravity += 0.05;
 		System.out.println(yvel);
-
-		// y--;
-
+	
+*/
 	}
 
 	void draw(Graphics g) {

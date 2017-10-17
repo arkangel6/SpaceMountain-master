@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,7 +37,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		try {
 
-			background = ImageIO.read(getClass().getResource("image.png"));
+			background = ImageIO.read(getClass().getResource("image2.jpg"));
 			backgroundHeight = background.getHeight();
 			System.out.println(backgroundHeight);
 
@@ -56,16 +57,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void updateGameState() {
 		manager.update();
 		manager.manageTrees();
+		manager.setScore(score++);
 	}
 
 	public void paintComponent(Graphics g) {
-		g.drawImage(background, 0, 0, frameWidth, frameHeight, 0 + x, y1, frameWidth + x, y2, this);
+		g.drawImage(background, 0, 0, frameWidth, frameHeight, 0 /*+ x*/, y1, frameWidth /*+ x*/, y2, this);
 		// System.out.println("paint");
-		g.drawImage(GamePanel.unicornImg, 120, 20, 50, 50, null);
+		g.drawImage(GamePanel.unicornImg, 120+x, 20, 50, 50, null);
 		manager.draw(g);
+		
+		 g.setColor(Color.WHITE);
+		g.drawString("SCORE: " + manager.getScore(), 200, 30);
 	}
 
-	// private int scrollSpeed = 3;
+	 private int scrollSpeed = 3;
 	double yvel = 0;
 	double gravity = 0.01;
 
@@ -74,19 +79,25 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			y1 = 0;
 			y2 = frameHeight;
 		} else {
-			y1 += yvel;
+			
+			 y1+=scrollSpeed;
+
+			y2+=scrollSpeed;			
+			
+			
+	/*		y1 += yvel;
 			y2 += yvel;
 			yvel += gravity;
 
-			// y1+=scrollSpeed;
-			// y2+=scrollSpeed;
+			
 			if (yvel >= 4) {
 				// sets max speed at 4
 				y1 += 4;
 				y2 += 4;
 				yvel = 4;
-
-			}
+				}
+*/
+			
 			// System.out.println(yvel);
 		}
 		repaint();
@@ -108,31 +119,49 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			// Unicorn.update("space");
+			scrollSpeed = 1;
 			yvel = 1;
 			System.out.println("space");
-
+			Trees.slow = true;
+			ObjectManager.slow2 = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			if (x >= 5) {
+		
+			x = x - 10;
+			
+		
+			
+			/*if (x >= 5) {
 				x = x - 5;
 			} else {
 				x = x;
 			}
+			*/
 			System.out.println("left");
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			if (x <= 48) {
+			
+			x = x+10;
+			/*if (x <= 48) {
 				x = x + 5;
 			} else {
 				x = x;
-			}
+			}*/
 			System.out.println("right");
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			// Unicorn.update("space");
+			scrollSpeed = 3;
+			Trees.slow = false;
+			ObjectManager.slow2 = false;
+			System.out.println("space");
 
+		}
+		
 	}
 }
