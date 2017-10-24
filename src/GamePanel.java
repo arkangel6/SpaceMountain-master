@@ -19,9 +19,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	int y1 = 0;
 	int y2 = 500;
 	int x = 0;
+	int y;
 	int score;
-	// Unicorn unicorn = new Unicorn(150, 40 ,50,50);
+	Unicorn unicorn = new Unicorn(150, 40 ,50,50);
 	ObjectManager manager;
+	Rainbow rainbow;
 	// GamePanel
 	public static BufferedImage unicornImg;
 	public static BufferedImage treeImg;
@@ -58,12 +60,24 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		manager.update();
 		manager.manageTrees();
 		manager.setScore(score++);
+		manager.addObject(rainbow = new Rainbow(unicorn.x-15+x, unicorn.y-5+y, 10,10));
+		
+		/*
+		manager.checkCollision();
+		 if(unicorn.isAlive==false) {
+			
+			 manager.reset();
+			 Unicorn unicorn = new Unicorn(150,20,50,50);
+			 manager.addObject(unicorn);
+			 manager.setScore(0);
+		 }
+		 */
 	}
 
 	public void paintComponent(Graphics g) {
 		g.drawImage(background, 0, 0, frameWidth, frameHeight, 0 /*+ x*/, y1, frameWidth /*+ x*/, y2, this);
 		// System.out.println("paint");
-		g.drawImage(GamePanel.unicornImg, 120+x, 20, 50, 50, null);
+		g.drawImage(GamePanel.unicornImg, 120+x, 20+y, 50, 50, null);
 		manager.draw(g);
 		
 		 g.setColor(Color.WHITE);
@@ -129,7 +143,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 			x = x - 10;
 			
-		
+				
+			
 			
 			/*if (x >= 5) {
 				x = x - 5;
@@ -143,12 +158,21 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			
 			x = x+10;
+			
+			
+			
 			/*if (x <= 48) {
 				x = x + 5;
 			} else {
 				x = x;
 			}*/
 			System.out.println("right");
+		}
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			y = y -10;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			y = y +10;
 		}
 	}
 
