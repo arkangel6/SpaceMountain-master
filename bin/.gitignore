@@ -1,6 +1,7 @@
 /GameObject.class
 /GamePanel.class
 /ObjectManager.class
+/Rainbow.class
 /SpaceMountain.class
 /Trees.class
 /Unicorn.class
@@ -8,4 +9,3 @@
 /image2.jpg
 /rainbowdash.png
 /tree.png
-/Rainbow.class

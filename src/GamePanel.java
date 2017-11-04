@@ -24,6 +24,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Unicorn unicorn = new Unicorn(150, 40 ,50,50);
 	ObjectManager manager;
 	Rainbow rainbow;
+	final int menu = 0;
+	final int game = 1;
+	int current_state = menu;
 	// GamePanel
 	public static BufferedImage unicornImg;
 	public static BufferedImage treeImg;
@@ -73,9 +76,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		 }
 		 */
 	}
+	
+	/*void drawMenuState(Graphics g) {
+		g.drawRect(0, 0, 300, 500);
+		 g.setColor(Color.BLUE);
+		 g.fillRect(0, 0, SpaceMountain.width, SpaceMountain.height);
+		 //g.setFont(titleFont);
+		 //g.setColor(Color.WHITE);
+		 //g.drawString("", 100, 300);
+		 
+	 }
+	 */
 
 	public void paintComponent(Graphics g) {
-		g.drawImage(background, 0, 0, frameWidth, frameHeight, 0 /*+ x*/, y1, frameWidth /*+ x*/, y2, this);
+		g.drawImage(background, 0, 0, frameWidth, frameHeight, 0/*+ x*/, y1, frameWidth  /*+ x*/, y2, this);
 		// System.out.println("paint");
 		g.drawImage(GamePanel.unicornImg, 120+x, 20+y, 50, 50, null);
 		manager.draw(g);
@@ -83,7 +97,22 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		 g.setColor(Color.WHITE);
 		g.drawString("SCORE: " + manager.getScore(), 200, 30);
 	}
-
+	
+	/*public void paintComponent2(Graphics g) {
+	
+		if(current_state == menu) {
+			drawMenuState(g);
+		}
+		else if(current_state == game) {
+			paintComponent(g);
+		}
+	}
+	*/
+	
+	/*void updateMenuState() {
+		//manager.setScore(0);
+	}*/
+	
 	 private int scrollSpeed = 3;
 	double yvel = 0;
 	double gravity = 0.01;
@@ -122,6 +151,21 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		moveBackground();
 		updateGameState();
 		// System.out.println("actionperformed");
+		//repaint();
+		
+		/*if(current_state == menu) {
+			updateMenuState();
+		}
+		else if(current_state == game) {
+			updateGameState();
+			moveBackground();
+			System.out.println("actionperformed");
+		}
+		*/
+		
+		
+		
+		
 	}
 
 	@Override
@@ -131,6 +175,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		/*if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+			
+			current_state++;
+				if(current_state > game) {
+					current_state = menu;
+				}
+		*/
+		
+		
+		
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			// Unicorn.update("space");
 			scrollSpeed = 1;
@@ -174,7 +228,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			y = y +10;
 		}
-	}
+		}
+	
 
 	@Override
 	public void keyReleased(KeyEvent e) {
