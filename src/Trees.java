@@ -7,11 +7,11 @@ public class Trees extends GameObject {
 	public Trees(int x, int y, int width, int height) {
 		super(x, y, width, height);
 	}
-	int y = 500;
+	//int y = 500;
 	void update() {
 		
 		 
-		
+		super.update();
 		 if(slow) {
 		 	y = y -1;
 		 }
@@ -20,7 +20,7 @@ public class Trees extends GameObject {
 		 
 		 }
 		
-		System.out.println(y);
+		//System.out.println(y);
 
 		/*
 		y -= yvel;

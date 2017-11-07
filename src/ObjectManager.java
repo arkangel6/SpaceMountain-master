@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
@@ -45,9 +46,12 @@ public class ObjectManager {
 	}
 
 	public void draw(Graphics g) {
+		
 		for (int i = 0; i < objects.size(); i++) {
 			GameObject o = objects.get(i);
 			o.draw(g);
+			g.setColor(Color.yellow);
+			g.drawRect((int)o.collisionBox.getX(), (int)o.collisionBox.getY(), (int)o.collisionBox.getWidth(), (int)o.collisionBox.getHeight());
 		}
 	}
 
@@ -90,8 +94,9 @@ public class ObjectManager {
 		
 		
 	}
-	/*
+	
 	public void checkCollision() {
+		System.out.println("cosalasdhfjas");
 		for (int i = 0; i < objects.size(); i++) {
 				for (int j = i + 1; j < objects.size(); j++) {
 		
@@ -102,13 +107,13 @@ public class ObjectManager {
 							(o2 instanceof Unicorn && o1 instanceof Trees)){
 						o1.isAlive = false;
 						o2.isAlive = false;
-						
+						System.out.println("collsiionsd ");
 					}
 				}
 				}
 			}
 		}
-		*/
+		
 
 	public void setScore(int s) {
 		score = s;

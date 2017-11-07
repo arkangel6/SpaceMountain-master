@@ -24,9 +24,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Unicorn unicorn = new Unicorn(150, 40 ,50,50);
 	ObjectManager manager;
 	Rainbow rainbow;
+	
 	final int menu = 0;
 	final int game = 1;
+	final int end = 2;
 	int current_state = menu;
+	
+	
 	// GamePanel
 	public static BufferedImage unicornImg;
 	public static BufferedImage treeImg;
@@ -38,13 +42,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		timer.addActionListener(this);
 
 		manager = new ObjectManager();
-		// manager.addObject(unicorn);
+		//manager.addObject(unicorn);
 
 		try {
 
 			background = ImageIO.read(getClass().getResource("image2.jpg"));
 			backgroundHeight = background.getHeight();
-			System.out.println(backgroundHeight);
+			//System.out.println(backgroundHeight);
 
 			treeImg = ImageIO.read(this.getClass().getResourceAsStream("tree.png"));
 			unicornImg = ImageIO.read(this.getClass().getResourceAsStream("rainbowdash.png"));
@@ -63,21 +67,37 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		manager.update();
 		manager.manageTrees();
 		manager.setScore(score++);
-		manager.addObject(rainbow = new Rainbow(unicorn.x-15+x, unicorn.y-5+y, 10,10));
+		//manager.addObject(rainbow = new Rainbow(unicorn.x-15+x, unicorn.y-5+y, 10,10));
 		
-		/*
+		
+		
 		manager.checkCollision();
 		 if(unicorn.isAlive==false) {
 			
 			 manager.reset();
 			 Unicorn unicorn = new Unicorn(150,20,50,50);
-			 manager.addObject(unicorn);
 			 manager.setScore(0);
 		 }
-		 */
+		 
 	}
 	
-	/*void drawMenuState(Graphics g) {
+	/*int random1 = 0;
+	int random2 = 1;
+	void randomRainbow() {
+		random1++;
+		if(random1 == random2) {
+		manager.addObject(rainbow = new Rainbow(unicorn.x-15+x, unicorn.y-5+y, 10,10));
+		random2 = 0;
+		}
+		else {
+			manager.addObject(rainbow = new Rainbow(unicorn.x-10+x, unicorn.y+y, 10,10));
+			random2++;
+			random1 = 0;
+		}
+	}
+	*/
+	
+	void drawMenuState(Graphics g) {
 		g.drawRect(0, 0, 300, 500);
 		 g.setColor(Color.BLUE);
 		 g.fillRect(0, 0, SpaceMountain.width, SpaceMountain.height);
@@ -86,16 +106,31 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		 //g.drawString("", 100, 300);
 		 
 	 }
-	 */
+	void drawEndState(Graphics g) {
+		g.drawRect(0, 0, 300, 500);
+		g.setColor(Color.red);
+		g.fillRect(0, 0, SpaceMountain.width, SpaceMountain.height);
+		
+	}
+	 
 
 	public void paintComponent(Graphics g) {
+		if(current_state == menu) {
+			drawMenuState(g);
+		}
+		else if(current_state == game){
 		g.drawImage(background, 0, 0, frameWidth, frameHeight, 0/*+ x*/, y1, frameWidth  /*+ x*/, y2, this);
 		// System.out.println("paint");
-		g.drawImage(GamePanel.unicornImg, 120+x, 20+y, 50, 50, null);
+		// unicorn g.drawImage(GamePanel.unicornImg, 120+x, 20+y, 50, 50, null);
+		//Unicorn unicorn = new Unicorn(150+x,20+y,50,50);
 		manager.draw(g);
 		
 		 g.setColor(Color.WHITE);
 		g.drawString("SCORE: " + manager.getScore(), 200, 30);
+		}
+		else if(current_state == end) {
+			drawEndState(g);
+		}
 	}
 	
 	/*public void paintComponent2(Graphics g) {
@@ -109,10 +144,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 	*/
 	
-	/*void updateMenuState() {
-		//manager.setScore(0);
-	}*/
 	
+	void updateMenuState() {
+		manager.setScore(0);
+	}
+	
+	void updateEndState() {
+		
+	}
 	 private int scrollSpeed = 3;
 	double yvel = 0;
 	double gravity = 0.01;
@@ -148,12 +187,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		moveBackground();
-		updateGameState();
+		//moveBackground();
+		//updateGameState();
 		// System.out.println("actionperformed");
-		//repaint();
+		repaint();
 		
-		/*if(current_state == menu) {
+		if(current_state == menu) {
 			updateMenuState();
 		}
 		else if(current_state == game) {
@@ -161,7 +200,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			moveBackground();
 			System.out.println("actionperformed");
 		}
-		*/
+		else if(current_state == end) {
+			updateEndState();
+			
+		}
+		
 		
 		
 		
@@ -175,15 +218,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		/*if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+		if(e.getKeyCode()==KeyEvent.VK_ENTER) {
 			
 			current_state++;
-				if(current_state > game) {
+				if(current_state > end) {
 					current_state = menu;
 				}
-		*/
 		
 		
+		}
 		
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			// Unicorn.update("space");
@@ -227,8 +270,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			y = y +10;
+		
 		}
 		}
+	
 	
 
 	@Override
