@@ -226,10 +226,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			System.out.println("right");
 		}
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			y = y - 10;
+			//y = y - 10;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			y = y + 10;
+			//y = y + 10;
 
 		}
 	}

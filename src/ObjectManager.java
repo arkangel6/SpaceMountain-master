@@ -58,9 +58,15 @@ public class ObjectManager {
 	public void manageTrees() {
 		if(slow2) {
 			treeSpawnTime = 3000;
+			treeSpawnTime2 = 600;
+			treeSpawnTime3 = 600; 
+			treeSpawnTime4 = 1500;
 		}
 		else {
 			treeSpawnTime = 1500;
+			treeSpawnTime2 = 200;
+			treeSpawnTime3 = 200;
+			treeSpawnTime4 = 500;
 		}
 		
 		if (System.currentTimeMillis() - treeTimer >= treeSpawnTime) {

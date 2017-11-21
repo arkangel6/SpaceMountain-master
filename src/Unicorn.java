@@ -2,7 +2,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Unicorn extends GameObject {
-
+	double yvel = 0;
+	double gravity = 1;
 	public Unicorn(int x, int y, int width, int height) {
 		super(x, y, width, height);
 	}
@@ -18,11 +19,15 @@ public class Unicorn extends GameObject {
 		super.update();
 		if (direction.equals("right")) {
 
-			x = x + 10;
+			//x = x + 10;
+			x += yvel;
+			yvel += gravity;
 
 			System.out.println(x);
 		} else if (direction.equals("left")) {
-			x = x - 10;
+			//x = x - 10;
+			x -= yvel;
+			yvel += gravity;
 			System.out.println("lllllllllllllllllllll");
 		}
 
