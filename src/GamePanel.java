@@ -45,7 +45,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		try {
 
-			background = ImageIO.read(getClass().getResource("image2.jpg"));
+			background = ImageIO.read(getClass().getResource("Ski.jpg"));
 			backgroundHeight = background.getHeight();
 			// System.out.println(backgroundHeight);
 
@@ -88,7 +88,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	 */
 
 	void drawMenuState(Graphics g) {
-		g.drawRect(0, 0, 300, 500);
+		g.drawRect(0, 0, 1000, 500);
 		g.setColor(Color.BLUE);
 		g.fillRect(0, 0, SpaceMountain.width, SpaceMountain.height);
 		// g.setFont(titleFont);
@@ -98,7 +98,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawEndState(Graphics g) {
-		g.drawRect(0, 0, 300, 500);
+		g.drawRect(0, 0, 1000, 500);
 		g.setColor(Color.red);
 		g.fillRect(0, 0, SpaceMountain.width, SpaceMountain.height);
 
@@ -136,7 +136,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	}
 
-	private int scrollSpeed = 3;
+	private int scrollSpeed = 1;
 	double yvel = 0;
 	double gravity = 0.01;
 

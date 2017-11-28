@@ -56,6 +56,7 @@ public class ObjectManager {
 	}
 
 	public void manageTrees() {
+		/*
 		if(slow2) {
 			treeSpawnTime = 3000;
 			treeSpawnTime2 = 600;
@@ -98,8 +99,12 @@ public class ObjectManager {
 			treeTimer4 = System.currentTimeMillis();
 		}	
 		
+		*/
 		
-	}
+
+			
+		}
+	
 	
 	public void checkCollision() {
 		System.out.println("cosalasdhfjas");
