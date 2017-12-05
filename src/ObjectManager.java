@@ -16,6 +16,9 @@ public class ObjectManager {
 		int treeSpawnTime2 = 200;
 		int treeSpawnTime3 = 200;
 		int treeSpawnTime4 = 500;
+		
+		long hurdleTimer = 0;
+		int hurdleSpawnTime = 1200;
 	static boolean slow2 = false;
 
 	private int score = 0;
@@ -56,18 +59,20 @@ public class ObjectManager {
 	}
 
 	public void manageTrees() {
-		/*
+		
 		if(slow2) {
 			treeSpawnTime = 3000;
 			treeSpawnTime2 = 600;
 			treeSpawnTime3 = 600; 
 			treeSpawnTime4 = 1500;
+			hurdleSpawnTime = 3000;
 		}
 		else {
 			treeSpawnTime = 1500;
 			treeSpawnTime2 = 200;
 			treeSpawnTime3 = 200;
 			treeSpawnTime4 = 500;
+			hurdleSpawnTime = 1200;
 		}
 		
 		if (System.currentTimeMillis() - treeTimer >= treeSpawnTime) {
@@ -78,28 +83,36 @@ public class ObjectManager {
 			treeTimer = System.currentTimeMillis();
 		}
 		if (System.currentTimeMillis() - treeTimer2 >= treeSpawnTime2) {
-			int r = new Random().nextInt(SpaceMountain.width);
-			addObject(new Trees(0, 500, 50, 50));
+			int r = new Random().nextInt(50);
+			int s = new Random().nextInt(40);
+			addObject(new Trees(0+r, 500, 50+s, 50+s));
 			
 
 			treeTimer2 = System.currentTimeMillis();
 		}
 		if (System.currentTimeMillis() - treeTimer3 >= treeSpawnTime3) {
-			int r = new Random().nextInt(SpaceMountain.width);
-			addObject(new Trees(250, 500, 50, 50));
+			int r = new Random().nextInt(120);
+			int s = new Random().nextInt(40);
+			addObject(new Trees(640+r, 500, 50+s, 50+s));
 			
 
 			treeTimer3 = System.currentTimeMillis();
 		}
-		if (System.currentTimeMillis() - treeTimer4 >= treeSpawnTime4) {
+		/*if (System.currentTimeMillis() - treeTimer4 >= treeSpawnTime4) {
 			int a = new Random().nextInt(40)+240;
 			addObject(new Trees(a, 500, 50, 50));
 			int b = new Random().nextInt(20);
 			addObject(new Trees(b, 500, 50, 50));
 			treeTimer4 = System.currentTimeMillis();
-		}	
+		}	*/
 		
-		*/
+		if (System.currentTimeMillis() - hurdleTimer >= hurdleSpawnTime) {
+			int r = new Random().nextInt(50);
+			addObject(new Hurdle(500+r, 500, 55, 60));
+			
+
+			hurdleTimer = System.currentTimeMillis();
+		}
 		
 
 			
