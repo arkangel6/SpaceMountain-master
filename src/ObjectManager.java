@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Panel;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -110,13 +111,14 @@ public class ObjectManager {
 			int r = new Random().nextInt(50);
 			addObject(new Hurdle(500+r, 500, 55, 60));
 			
-
+			
+			}
 			hurdleTimer = System.currentTimeMillis();
 		}
 		
 
 			
-		}
+		
 	
 	
 	public void checkCollision() {
@@ -133,9 +135,19 @@ public class ObjectManager {
 						o2.isAlive = false;
 						System.out.println("collsiionsd ");
 					}
+					
+					if(o1.collisionBox.intersects(o2.collisionBox)){
+						if((o1 instanceof Unicorn && o2 instanceof Hurdle) ||
+								(o2 instanceof Unicorn && o1 instanceof Hurdle)){
+							o1.isAlive = false;
+							o2.isAlive = false;
+							System.out.println("collsiionsd ");
+						}
+				
 				}
 				}
 			}
+		}
 		}
 		
 

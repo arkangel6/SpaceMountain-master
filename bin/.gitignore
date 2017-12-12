@@ -1,6 +1,9 @@
 /GameObject.class
 /GamePanel.class
+/Hurdle.class
 /ObjectManager.class
+/Pixel.png
+/PixelArt.png
 /Rainbow.class
 /Ski.jpg
 /Skimountain.png
@@ -9,11 +12,7 @@
 /Unicorn.class
 /image.png
 /image2.jpg
-/rainbowdash.png
-/tree.png
-/PixelArt.png
-/PixelArt (1).png
-/Pixel.png
 /pixel2.jpg
-/Hurdle.class
+/rainbowdash.png
 /skigate.png
+/tree.png

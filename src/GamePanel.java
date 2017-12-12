@@ -1,10 +1,12 @@
 import java.awt.Color;
+import java.awt.Event;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -68,13 +70,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		manager.manageTrees();
 		manager.setScore(score++);
 		manager.addObject(rainbow = new Rainbow(unicorn.x - 15 + x, unicorn.y - 5 + y, 10, 10));
-
+		
+		
 		manager.checkCollision();
 
 		if (unicorn.isAlive == false) {
 			current_state = end;
 			manager.reset(); // unicorn = new Unicorn(150, 20, 50, 50);
-			manager.setScore(0);
+			//manager.setScore(0);
 
 		}
 
@@ -99,10 +102,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawEndState(Graphics g) {
+		
 		g.drawRect(0, 0, 800, 500);
 		g.setColor(Color.red);
 		g.fillRect(0, 0, SpaceMountain.width, SpaceMountain.height);
-		
+		g.setColor(Color.BLACK);
+		g.drawString("SCORE: " + manager.getScore(), 300, 250);
 	}
 
 	public void paintComponent(Graphics g) {
@@ -186,7 +191,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyTyped(KeyEvent e) {
 
 	}
+	
+	
 
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -197,7 +205,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			}
 
 		}
-
+		
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			// Unicorn.update("space");
 			scrollSpeed = 1;
