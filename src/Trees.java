@@ -4,6 +4,7 @@ public class Trees extends GameObject {
 	double yvel = 0;
 	double gravity = 0.01;
 	static boolean slow = false;
+	static boolean fast = false;
 	public Trees(int x, int y, int width, int height) {
 		super(x, y, width, height);
 	}
@@ -14,6 +15,9 @@ public class Trees extends GameObject {
 		super.update();
 		 if(slow) {
 		 	y = y -1;
+		 }
+		 else if(fast) {
+			 y = y - 20;
 		 }
 		 else {
 			 y = y-3; 

@@ -21,7 +21,8 @@ public class ObjectManager {
 		long hurdleTimer = 0;
 		int hurdleSpawnTime = 1200;
 	static boolean slow2 = false;
-
+	 static boolean fast2 = false;
+	 
 	private int score = 0;
 
 	public ObjectManager() {
@@ -68,6 +69,7 @@ public class ObjectManager {
 			treeSpawnTime4 = 1500;
 			hurdleSpawnTime = 3000;
 		}
+		
 		else {
 			treeSpawnTime = 1500;
 			treeSpawnTime2 = 200;
@@ -112,9 +114,10 @@ public class ObjectManager {
 			addObject(new Hurdle(500+r, 500, 55, 60));
 			
 			
-			}
+			
 			hurdleTimer = System.currentTimeMillis();
 		}
+	} 
 		
 
 			
@@ -122,33 +125,47 @@ public class ObjectManager {
 	
 	
 	public void checkCollision() {
-		System.out.println("cosalasdhfjas");
-		for (int i = 0; i < objects.size(); i++) {
-				for (int j = i + 1; j < objects.size(); j++) {
 		
-	GameObject o1 = objects.get(i);
-				GameObject o2 = objects.get(j);
-				if(o1.collisionBox.intersects(o2.collisionBox)){
-					if((o1 instanceof Unicorn && o2 instanceof Trees) ||
-							(o2 instanceof Unicorn && o1 instanceof Trees)){
-						o1.isAlive = false;
-						o2.isAlive = false;
-						System.out.println("collsiionsd ");
-					}
-					
+		
+		
+		
+		
+		if(fast2) {
+		
+			System.out.println("hi");
+						
+	
+			
+		}
+		else {
+			System.out.println("cosalasdhfjas");
+			for (int i = 0; i < objects.size(); i++) {
+					for (int j = i + 1; j < objects.size(); j++) {
+			
+		GameObject o1 = objects.get(i);
+					GameObject o2 = objects.get(j);
 					if(o1.collisionBox.intersects(o2.collisionBox)){
-						if((o1 instanceof Unicorn && o2 instanceof Hurdle) ||
-								(o2 instanceof Unicorn && o1 instanceof Hurdle)){
+						if((o1 instanceof Unicorn && o2 instanceof Trees) ||
+								(o2 instanceof Unicorn && o1 instanceof Trees)){
 							o1.isAlive = false;
 							o2.isAlive = false;
 							System.out.println("collsiionsd ");
 						}
-				
-				}
-				}
+						
+						if(o1.collisionBox.intersects(o2.collisionBox)){
+							if((o1 instanceof Unicorn && o2 instanceof Hurdle) ||
+									(o2 instanceof Unicorn && o1 instanceof Hurdle)){
+								o1.isAlive = false;
+								o2.isAlive = false;
+								System.out.println("collsiionsd ");
+		}
+		}
+					}
+					}
 			}
 		}
 		}
+		
 		
 
 	public void setScore(int s) {

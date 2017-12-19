@@ -234,14 +234,33 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			 */
 			System.out.println("right");
 		}
-		if (e.getKeyCode() == KeyEvent.VK_UP) {
+		if (e.getKeyCode() == KeyEvent.VK_UP) {	
+			
+				
+				scrollSpeed = 20;
+				yvel = 20;
+				Trees.fast = true;
+				manager.fast2 = true;
+			
+			
+			
+			
+			
 			//y = y - 10;
 		}
+			
+			
+		
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			//y = y + 10;
-
+			scrollSpeed = 3;
+			yvel =0;
+			Trees.fast = false;
+			manager.fast2 = false;
+			
 		}
-	}
+		}
+	
 
 	@Override
 	public void keyReleased(KeyEvent e) {
