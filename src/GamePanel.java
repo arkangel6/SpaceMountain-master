@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Unicorn unicorn = new Unicorn(150, 20, 50, 50);
 	ObjectManager manager;
 	Rainbow rainbow;
-
+	int right;
 	final int menu = 0;
 	final int game = 1;
 	final int end = 2;
@@ -69,6 +69,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		manager.update();
 		manager.manageTrees();
 		manager.setScore(score++);
+		//manager.setRight(right++);
 		manager.addObject(rainbow = new Rainbow(unicorn.x - 15 + x, unicorn.y - 5 + y, 10, 10));
 		
 		
@@ -140,7 +141,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void updateEndState() {
 
 	}
-
+	
 	private int scrollSpeed = 3;
 	double yvel = 0;
 	double gravity = 0.01;
@@ -191,8 +192,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyTyped(KeyEvent e) {
 
 	}
-	
-	
 
 	
 	@Override
@@ -213,10 +212,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			System.out.println("space");
 			Trees.slow = true;
 			ObjectManager.slow2 = true;
-			Hurdle.slow = true;
+			Boost.slow = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			unicorn.update("left");
+			
 			// x = x - 10;
 
 			/*
@@ -227,6 +227,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			unicorn.update("right");
+			
 			// x = x + 10;
 
 			/*
@@ -241,9 +242,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				yvel = 20;
 				Trees.fast = true;
 				manager.fast2 = true;
-			
-			
-			
 			
 			
 			//y = y - 10;
@@ -268,10 +266,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			// unicorn.update("space");
 			scrollSpeed = 3;
 			Trees.slow = false;
-			Hurdle.slow = false;
+			Boost.slow = false;
 			ObjectManager.slow2 = false;
 			System.out.println("space");
 
+		}
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			manager.setRight(0);
+		}
+		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+			
 		}
 
 	}

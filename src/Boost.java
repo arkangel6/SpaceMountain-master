@@ -1,8 +1,8 @@
 import java.awt.Graphics;
 
-public class Hurdle extends GameObject {
+public class Boost extends GameObject {
 	static boolean slow = false;
-	public Hurdle(int x, int y, int width, int height) {
+	public Boost(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		
 	}

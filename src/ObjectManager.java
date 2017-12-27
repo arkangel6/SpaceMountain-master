@@ -23,8 +23,9 @@ public class ObjectManager {
 	static boolean slow2 = false;
 	 static boolean fast2 = false;
 	 
+	 
 	private int score = 0;
-
+	
 	public ObjectManager() {
 		objects = new ArrayList<GameObject>();
 	}
@@ -111,7 +112,7 @@ public class ObjectManager {
 		
 		if (System.currentTimeMillis() - hurdleTimer >= hurdleSpawnTime) {
 			int r = new Random().nextInt(50);
-			addObject(new Hurdle(500+r, 500, 55, 60));
+			addObject(new Boost(500+r, 500, 55, 60));
 			
 			
 			
@@ -153,11 +154,17 @@ public class ObjectManager {
 						}
 						
 						if(o1.collisionBox.intersects(o2.collisionBox)){
-							if((o1 instanceof Unicorn && o2 instanceof Hurdle) ||
-									(o2 instanceof Unicorn && o1 instanceof Hurdle)){
-								o1.isAlive = false;
+							if((o1 instanceof Unicorn && o2 instanceof Boost) ||
+									(o2 instanceof Unicorn && o1 instanceof Boost)){
+								
+								fast2 = true;
+								Trees.fast = true;
+								
+								
+								
+								/*o1.isAlive = false;
 								o2.isAlive = false;
-								System.out.println("collsiionsd ");
+								System.out.println("collsiionsd ");*/
 		}
 		}
 					}
@@ -177,5 +184,21 @@ public class ObjectManager {
 	}
 	public void reset(){
 		objects.clear();
+	}
+	private int left = 0;
+	public void setLeft(int l) {
+		left = l;
+	}
+	public int getLeft() {
+		return left;
+	}
+	
+	
+	private int right = 0;
+	public void setRight(int r) {
+		right = r;
+	}
+	public int getRight() {
+		return right;
 	}
 }

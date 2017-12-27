@@ -4,8 +4,12 @@ import java.awt.Graphics;
 public class Unicorn extends GameObject {
 	double yvel = 0.2;
 	double gravity = 1;
+	
+	ObjectManager manager;
+	int rightvalue;
 	public Unicorn(int x, int y, int width, int height) {
 		super(x, y, width, height);
+		manager = new ObjectManager();
 	}
 
 	void update(String direction) {
@@ -15,28 +19,41 @@ public class Unicorn extends GameObject {
 
 		// System.out.println("space");
 		// }}
-
+		
 		super.update();
 		if (direction.equals("right")) {
 			
-			//x = x + 10;
-		
-			x += yvel;
-			yvel += gravity;
 			
+			manager.setRight(rightvalue++);
+			
+			
+				x = x + manager.getRight();
+			
+			
+			
+			
+			/*x += yvel;
+			yvel += gravity;
+			*/
 			
 
-			System.out.println(x);
+			//System.out.println(x);
 		} else if (direction.equals("left")) {
-			//x = x - 10;
 			
 			
+			x = x - 10;
+			
+			/*
 			x -= yvel;
 			yvel += gravity;
 			
+			*/
+			//System.out.println("lllllllllllllllllllll");
 			
-			System.out.println("lllllllllllllllllllll");
-			
+		}
+		else {
+			manager.setRight(0);
+			rightvalue = manager.getRight();
 		}
 
 	}
