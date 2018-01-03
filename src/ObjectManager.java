@@ -1,8 +1,12 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Panel;
+import java.time.Clock;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.management.timer.Timer;
 
 public class ObjectManager {
 
@@ -30,6 +34,7 @@ public class ObjectManager {
 	
 	public ObjectManager() {
 		objects = new ArrayList<GameObject>();
+		
 	}
 
 	public void addObject(GameObject o) {
@@ -128,29 +133,32 @@ public class ObjectManager {
 		
 
 			
-		
+	int timer = 0;	
 	
 	
 	public void checkCollision() {
 		
 		
-		
-		
+		timer++;
 		
 		if(fast2) {
-		
+			
 			System.out.println("hi");
 						
 	
 			
 		}
+		
 		else {
+		
 			System.out.println("cosalasdhfjas");
 			for (int i = 0; i < objects.size(); i++) {
 					for (int j = i + 1; j < objects.size(); j++) {
-			
+						
+					
 		GameObject o1 = objects.get(i);
 					GameObject o2 = objects.get(j);
+					
 					if(o1.collisionBox.intersects(o2.collisionBox)){
 						if((o1 instanceof Unicorn && o2 instanceof Trees) ||
 								(o2 instanceof Unicorn && o1 instanceof Trees)){
@@ -159,19 +167,32 @@ public class ObjectManager {
 							System.out.println("collsiionsd ");
 						}
 						
+					
+						
 						if(o1.collisionBox.intersects(o2.collisionBox)){
 							if((o1 instanceof Unicorn && o2 instanceof Boost) ||
 									(o2 instanceof Unicorn && o1 instanceof Boost)){
 								
-								if (System.currentTimeMillis() - boostDuration >= boostDurationTime) {
 									
+									
+									
+									if(timer <= 80) {
 									fast2 = true;
 									Trees.fast = true;
-
-									treeTimer = System.currentTimeMillis();
-								}
+									GamePanel.scrollfast = true;
+				
+									
+									}
+									else {
+										
+										fast2 = false;
+										Trees.fast = false;
+										GamePanel.scrollfast = false;
+										
+									}
 								
 								
+									System.out.println(timer);
 								
 								
 								/*o1.isAlive = false;
@@ -183,9 +204,9 @@ public class ObjectManager {
 					}
 			}
 		}
-		}
+	}
 		
-		
+	
 
 	public void setScore(int s) {
 		score = s;

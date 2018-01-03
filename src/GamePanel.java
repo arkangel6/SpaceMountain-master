@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int game = 1;
 	final int end = 2;
 	int current_state = menu;
-
+	static boolean scrollfast = false;
 	// GamePanel
 	public static BufferedImage unicornImg;
 	public static BufferedImage treeImg;
@@ -71,7 +71,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		manager.setScore(score++);
 		//manager.setRight(right++);
 		manager.addObject(rainbow = new Rainbow(unicorn.x - 15 + x, unicorn.y - 5 + y, 10, 10));
-		
+		if(scrollfast) {
+			scrollSpeed = 20;
+			yvel = 20;
+		}
+		else {
+			scrollSpeed = 3;
+			yvel = 0;
+		}
 		
 		manager.checkCollision();
 
