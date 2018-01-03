@@ -19,7 +19,7 @@ public class Boost extends GameObject {
 		
 	}
  void draw(Graphics g) {
-	 g.drawImage(GamePanel.hurdleImg, x, y, width, height, null);
+	 g.drawImage(GamePanel.boostImg, x, y, width, height, null);
 	 
  }
 }

@@ -18,11 +18,13 @@ public class ObjectManager {
 		int treeSpawnTime3 = 200;
 		int treeSpawnTime4 = 500;
 		
-		long hurdleTimer = 0;
-		int hurdleSpawnTime = 1200;
+		long boostTimer = 0;
+		int boostSpawnTime = 1200;
 	static boolean slow2 = false;
 	 static boolean fast2 = false;
 	 
+	 long boostDuration = 0;
+	 int boostDurationTime = 5000;
 	 
 	private int score = 0;
 	
@@ -68,7 +70,7 @@ public class ObjectManager {
 			treeSpawnTime2 = 600;
 			treeSpawnTime3 = 600; 
 			treeSpawnTime4 = 1500;
-			hurdleSpawnTime = 3000;
+			boostSpawnTime = 3000;
 		}
 		
 		else {
@@ -76,7 +78,7 @@ public class ObjectManager {
 			treeSpawnTime2 = 200;
 			treeSpawnTime3 = 200;
 			treeSpawnTime4 = 500;
-			hurdleSpawnTime = 1200;
+			boostSpawnTime = 1200;
 		}
 		
 		if (System.currentTimeMillis() - treeTimer >= treeSpawnTime) {
@@ -110,13 +112,17 @@ public class ObjectManager {
 			treeTimer4 = System.currentTimeMillis();
 		}	*/
 		
-		if (System.currentTimeMillis() - hurdleTimer >= hurdleSpawnTime) {
+		if (System.currentTimeMillis() - boostTimer >= boostSpawnTime) {
 			int r = new Random().nextInt(50);
+			
+			
+			if(fast2){
+				
+			}
+			else{
 			addObject(new Boost(500+r, 500, 55, 60));
-			
-			
-			
-			hurdleTimer = System.currentTimeMillis();
+			boostTimer = System.currentTimeMillis();
+			}
 		}
 	} 
 		
@@ -157,8 +163,14 @@ public class ObjectManager {
 							if((o1 instanceof Unicorn && o2 instanceof Boost) ||
 									(o2 instanceof Unicorn && o1 instanceof Boost)){
 								
-								fast2 = true;
-								Trees.fast = true;
+								if (System.currentTimeMillis() - boostDuration >= boostDurationTime) {
+									
+									fast2 = true;
+									Trees.fast = true;
+
+									treeTimer = System.currentTimeMillis();
+								}
+								
 								
 								
 								

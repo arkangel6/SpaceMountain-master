@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	// GamePanel
 	public static BufferedImage unicornImg;
 	public static BufferedImage treeImg;
-	public static BufferedImage hurdleImg;
+	public static BufferedImage boostImg;
 	public GamePanel(int frameWidth, int frameHeight) {
 		this.frameHeight = frameHeight;
 		this.frameWidth = frameWidth;
@@ -53,7 +53,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 			treeImg = ImageIO.read(this.getClass().getResourceAsStream("tree.png"));
 			unicornImg = ImageIO.read(this.getClass().getResourceAsStream("rainbowdash.png"));
-			hurdleImg = ImageIO.read(this.getClass().getResourceAsStream("skigate.png"));
+			boostImg = ImageIO.read(this.getClass().getResourceAsStream("boost2.png"));
 		} catch (Exception e) {
 			System.out.println("no background image");
 		}
