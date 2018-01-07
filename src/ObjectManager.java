@@ -16,17 +16,21 @@ public class ObjectManager {
 	long treeTimer2 = 0;
 	long treeTimer3 = 0;
 	long treeTimer4 = 0;
+	long hurdleTimer = 0;
+	long hurdle2Timer = 0;
 	
 		int treeSpawnTime = 1500;
 		int treeSpawnTime2 = 200;
 		int treeSpawnTime3 = 200;
 		int treeSpawnTime4 = 500;
+		int hurdleSpawnTime = 2000;
+		int hurdle2SpawnTime = 2000;
 		
 		long boostTimer = 0;
-		int boostSpawnTime = 1200;
+		int boostSpawnTime = 300;
 	static boolean slow2 = false;
 	 static boolean fast2 = false;
-	 
+	 static boolean leftside = false;
 	 long boostDuration = 0;
 	 int boostDurationTime = 5000;
 	 
@@ -118,33 +122,85 @@ public class ObjectManager {
 		}	*/
 		
 		if (System.currentTimeMillis() - boostTimer >= boostSpawnTime) {
-			int r = new Random().nextInt(50);
+			int r = new Random().nextInt(400);
 			
 			
 			if(fast2){
 				
 			}
 			else{
-			addObject(new Boost(500+r, 500, 55, 60));
+			addObject(new Boost(100+r, 500, 55, 60));
 			boostTimer = System.currentTimeMillis();
 			}
 		}
+		
+		
+		if (System.currentTimeMillis() - hurdleTimer >= hurdleSpawnTime) {
+			
+			if(leftside){
+				
+			}else{
+			int r = new Random().nextInt(100);
+			addObject(new Hurdle(300 + r , 500, 300, 50));
+			
+		
+			hurdleTimer = System.currentTimeMillis();
+			leftside = true;
+			}
+		}
+		
+		if (System.currentTimeMillis() - hurdle2Timer >= hurdle2SpawnTime) {
+			
+			if(leftside){
+			int r = new Random().nextInt(100);
+			addObject(new leftHurdle(r , 500, 300, 50));
+			
+			
+			hurdle2Timer = System.currentTimeMillis();
+			leftside = false;
+			}
+			else{
+				
+			}
+		}
+		
+		
+		
 	} 
 		
 
 			
-	int timer = 0;	
-	
+		
+	int timer = 0;
 	
 	public void checkCollision() {
 		
 		
-		timer++;
+		
 		
 		if(fast2) {
+			timer++;
+			System.out.println(timer);
 			
-			System.out.println("hi");
-						
+			if(timer <= 250) {
+				//fast2 = true;
+				Trees.fast = true;
+				GamePanel.scrollfast = true;
+				Boost.fast = true;
+				Hurdle.hurdlefast = true;
+				leftHurdle.hurdlefast2 = true;
+				}
+				else {
+					
+					fast2 = false;
+					Trees.fast = false;
+					GamePanel.scrollfast = false;
+					Boost.fast = false;
+					Hurdle.hurdlefast = false;
+					leftHurdle.hurdlefast2 = false;
+					timer = 0;
+					
+				}
 	
 			
 		}
@@ -156,8 +212,8 @@ public class ObjectManager {
 					for (int j = i + 1; j < objects.size(); j++) {
 						
 					
-		GameObject o1 = objects.get(i);
-					GameObject o2 = objects.get(j);
+						GameObject o1 = objects.get(i);
+						GameObject o2 = objects.get(j);
 					
 					if(o1.collisionBox.intersects(o2.collisionBox)){
 						if((o1 instanceof Unicorn && o2 instanceof Trees) ||
@@ -174,25 +230,11 @@ public class ObjectManager {
 									(o2 instanceof Unicorn && o1 instanceof Boost)){
 								
 									
-									
-									
-									if(timer <= 80) {
 									fast2 = true;
-									Trees.fast = true;
-									GamePanel.scrollfast = true;
-				
-									
-									}
-									else {
-										
-										fast2 = false;
-										Trees.fast = false;
-										GamePanel.scrollfast = false;
-										
-									}
+								
+			
 								
 								
-									System.out.println(timer);
 								
 								
 								/*o1.isAlive = false;
@@ -200,8 +242,43 @@ public class ObjectManager {
 								System.out.println("collsiionsd ");*/
 		}
 		}
+						
 					}
 					}
+			}
+		}
+		}
+	
+	
+	public static boolean rightskigate = false;
+	public static boolean leftskigate = false;
+	public void checkCollisionHurdle(){
+		System.out.println("yesyes");
+		for (int i = 0; i < objects.size(); i++) {
+			for (int j = i + 1; j < objects.size(); j++) {
+				
+			
+				GameObject o1 = objects.get(i);
+				GameObject o2 = objects.get(j);
+			
+			if(o1.collisionBox.intersects(o2.collisionBox)){
+				if((o1 instanceof Unicorn && o2 instanceof Hurdle) ||
+						(o2 instanceof Unicorn && o1 instanceof Hurdle)){
+					
+					rightskigate = true;
+					System.out.println("righthurdle");
+					
+				}
+			}
+			if(o1.collisionBox.intersects(o2.collisionBox)){
+				if((o1 instanceof Unicorn && o2 instanceof leftHurdle) ||
+						(o2 instanceof Unicorn && o1 instanceof leftHurdle)){
+					
+					leftskigate = true;
+					System.out.println("lefthurdle");
+					
+				}
+			}
 			}
 		}
 	}

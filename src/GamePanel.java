@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Event;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,6 +37,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static BufferedImage unicornImg;
 	public static BufferedImage treeImg;
 	public static BufferedImage boostImg;
+	public static BufferedImage hurdleImg;
+	public static BufferedImage hurdleleftImg;
 	public GamePanel(int frameWidth, int frameHeight) {
 		this.frameHeight = frameHeight;
 		this.frameWidth = frameWidth;
@@ -54,6 +57,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			treeImg = ImageIO.read(this.getClass().getResourceAsStream("tree.png"));
 			unicornImg = ImageIO.read(this.getClass().getResourceAsStream("rainbowdash.png"));
 			boostImg = ImageIO.read(this.getClass().getResourceAsStream("boost2.png"));
+			hurdleImg = ImageIO.read(this.getClass().getResourceAsStream("rightskigate.png"));
+			hurdleleftImg = ImageIO.read(this.getClass().getResourceAsStream("leftskigate2.png"));
 		} catch (Exception e) {
 			System.out.println("no background image");
 		}
@@ -68,7 +73,31 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void updateGameState() {
 		manager.update();
 		manager.manageTrees();
+		
+		if(ObjectManager.fast2){
+			manager.setScore(score++);
+			manager.setScore(score++);
+			manager.setScore(score++);
+			manager.setScore(score++);
+			manager.setScore(score++);
+		}
+		else{
 		manager.setScore(score++);
+		}
+		
+		if(ObjectManager.rightskigate){
+			for (int i = 0; i < 10; i++) {
+			manager.setScore(score++);
+			}
+			ObjectManager.rightskigate = false;
+		}
+		if(ObjectManager.leftskigate){
+			for (int i = 0; i < 10; i++) {
+			manager.setScore(score++);
+			}
+			ObjectManager.leftskigate = false;
+		}
+		
 		//manager.setRight(right++);
 		manager.addObject(rainbow = new Rainbow(unicorn.x - 15 + x, unicorn.y - 5 + y, 10, 10));
 		if(scrollfast) {
@@ -81,7 +110,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		
 		manager.checkCollision();
-
+		manager.checkCollisionHurdle();
 		if (unicorn.isAlive == false) {
 			current_state = end;
 			manager.reset(); // unicorn = new Unicorn(150, 20, 50, 50);
@@ -128,7 +157,25 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			// unicorn = new Unicorn(150, 20, 50, 50);
 			manager.draw(g);
 			g.setColor(Color.BLACK);
-			g.drawString("SCORE: " + manager.getScore(), 200, 30);
+			g.setFont(new Font("Ariel", Font.PLAIN, 20));
+			g.drawString("SCORE: " + manager.getScore(), 600, 30);
+			
+			if(ObjectManager.rightskigate){
+				g.setFont(new Font("Ariel", Font.BOLD, 50));
+				g.drawString("+300", 500, 200);
+			}
+			else{
+				g.drawString("      ", 500, 200);
+			}
+			if(ObjectManager.leftskigate){
+				g.setFont(new Font("Ariel", Font.BOLD, 50));
+				g.drawString("+300", 300, 200);
+			}
+			else{
+				g.drawString("      ", 500, 200);
+			}
+			
+			
 		} else if (current_state == end) {
 			drawEndState(g);
 		}
