@@ -39,6 +39,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static BufferedImage boostImg;
 	public static BufferedImage hurdleImg;
 	public static BufferedImage hurdleleftImg;
+	
+	
 	public GamePanel(int frameWidth, int frameHeight) {
 		this.frameHeight = frameHeight;
 		this.frameWidth = frameWidth;
@@ -113,8 +115,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		manager.checkCollisionHurdle();
 		if (unicorn.isAlive == false) {
 			current_state = end;
-			manager.reset(); // unicorn = new Unicorn(150, 20, 50, 50);
+			manager.reset(); 
+			//unicorn = new Unicorn(150, 20, 50, 50);
 			//manager.setScore(0);
+			
 
 		}
 
@@ -127,6 +131,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	 * manager.addObject(rainbow = new Rainbow(unicorn.x-10+x, unicorn.y+y, 10,10));
 	 * random2++; random1 = 0; } }
 	 */
+	void startagain() {
+		unicorn = new Unicorn(150, 20, 50, 50);
+		manager.addObject(unicorn);
+		score = 0;
+		manager.setScore(0);
+		
+		
+	}
 
 	void drawMenuState(Graphics g) {
 		g.drawRect(0, 0, 800, 500);
@@ -140,43 +152,53 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void drawEndState(Graphics g) {
 		
-		//g.drawRect(0, 0, 800, 500);
-		//g.setColor(Color.red);
-		//g.fillRect(0, 0, SpaceMountain.width, SpaceMountain.height);
+		g.drawRect(0, 0, 800, 500);
+		g.setColor(Color.red);
+		g.fillRect(0, 0, SpaceMountain.width, SpaceMountain.height);
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Ariel", Font.BOLD, 40));
-		g.drawString("SCORE: " + manager.getScore(), 250, 250);
+		g.drawString("SCORE: " + manager.getScore(), 250, 300);
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("Ariel", Font.BOLD, 80));
+		g.drawString("GAMEOVER :(", 120, 200);
+		
+		g.setFont(new Font("Ariel", Font.BOLD, 30));
+		g.drawString("Press 1 to play again", 200, 400);
+		
+	}
+	
+	void drawGameState(Graphics g) {
+		g.drawImage(background, 0, 0, frameWidth, frameHeight, 0/* + x */, y1, frameWidth /* + x */, y2, this);
+		// System.out.println("paint");
+		// unicorn g.drawImage(GamePanel.unicornImg, 120+x, 20+y, 50, 50, null);
+		// unicorn = new Unicorn(150, 20, 50, 50);
+		manager.draw(g);
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("Ariel", Font.PLAIN, 20));
+		g.drawString("SCORE: " + manager.getScore(), 600, 30);
+		
+		if(ObjectManager.rightskigate){
+			g.setFont(new Font("Ariel", Font.BOLD, 50));
+			g.drawString("+300", 500, 200);
+		}
+		else{
+			g.drawString("      ", 500, 200);
+		}
+		if(ObjectManager.leftskigate){
+			g.setFont(new Font("Ariel", Font.BOLD, 50));
+			g.drawString("+300", 300, 200);
+		}
+		else{
+			g.drawString("      ", 500, 200);
+		}
+		
 	}
 
 	public void paintComponent(Graphics g) {
 		if (current_state == menu) {
 			drawMenuState(g);
 		} else if (current_state == game) {
-			g.drawImage(background, 0, 0, frameWidth, frameHeight, 0/* + x */, y1, frameWidth /* + x */, y2, this);
-			// System.out.println("paint");
-			// unicorn g.drawImage(GamePanel.unicornImg, 120+x, 20+y, 50, 50, null);
-			// unicorn = new Unicorn(150, 20, 50, 50);
-			manager.draw(g);
-			g.setColor(Color.BLACK);
-			g.setFont(new Font("Ariel", Font.PLAIN, 20));
-			g.drawString("SCORE: " + manager.getScore(), 600, 30);
-			
-			if(ObjectManager.rightskigate){
-				g.setFont(new Font("Ariel", Font.BOLD, 50));
-				g.drawString("+300", 500, 200);
-			}
-			else{
-				g.drawString("      ", 500, 200);
-			}
-			if(ObjectManager.leftskigate){
-				g.setFont(new Font("Ariel", Font.BOLD, 50));
-				g.drawString("+300", 300, 200);
-			}
-			else{
-				g.drawString("      ", 500, 200);
-			}
-			
-			
+			drawGameState(g);
 		} else if (current_state == end) {
 			drawEndState(g);
 		}
@@ -257,6 +279,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			if (current_state > end) {
 				current_state = menu;
 			}
+
+		}
+		if (e.getKeyCode() == KeyEvent.VK_1) {
+
+				startagain();
+				current_state = game;
+			
 
 		}
 		
