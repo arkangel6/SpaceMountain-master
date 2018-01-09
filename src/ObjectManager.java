@@ -24,15 +24,18 @@ public class ObjectManager {
 		int treeSpawnTime3 = 200;
 		int treeSpawnTime4 = 500;
 		int hurdleSpawnTime = 2000;
-		int hurdle2SpawnTime = 2000;
-		
+		//int hurdle2SpawnTime = 2000;
+		int count2 = 0;
 		long boostTimer = 0;
-		int boostSpawnTime = 300;
+		int boostSpawnTime = 5000;
+	
 	static boolean slow2 = false;
 	 static boolean fast2 = false;
+	 
 	 static boolean leftside = false;
-	 long boostDuration = 0;
-	 int boostDurationTime = 5000;
+	 
+	 //long boostDuration = 0;
+	 //int boostDurationTime = 5000;
 	 
 	private int score = 0;
 	
@@ -87,8 +90,10 @@ public class ObjectManager {
 			treeSpawnTime2 = 200;
 			treeSpawnTime3 = 200;
 			treeSpawnTime4 = 500;
-			boostSpawnTime = 1200;
+			boostSpawnTime = 3500;
+			
 		}
+		
 		
 		if (System.currentTimeMillis() - treeTimer >= treeSpawnTime) {
 			int r = new Random().nextInt(SpaceMountain.width);
@@ -132,41 +137,58 @@ public class ObjectManager {
 			addObject(new Boost(100+r, 500, 55, 60));
 			boostTimer = System.currentTimeMillis();
 			}
+			//boostTimer = System.currentTimeMillis();
 		}
+		
+		
 		
 		
 		if (System.currentTimeMillis() - hurdleTimer >= hurdleSpawnTime) {
 			
-			if(leftside){
-				
-			}else{
-			int r = new Random().nextInt(100);
-			addObject(new Hurdle(300 + r , 500, 300, 50));
 			
-		
+			
+			
+			System.out.print(count2);
+			if(count2 % 2 == 0) {
+			int r2 = new Random().nextInt(100);
+			addObject(new Hurdle(300 + r2 , 500, 300, 50));
+			count2++;
+			
 			hurdleTimer = System.currentTimeMillis();
-			leftside = true;
 			}
-		}
-		
-		if (System.currentTimeMillis() - hurdle2Timer >= hurdle2SpawnTime) {
-			
-			if(leftside){
-			int r = new Random().nextInt(100);
-			addObject(new leftHurdle(r , 500, 300, 50));
-			
-			
-			hurdle2Timer = System.currentTimeMillis();
-			leftside = false;
-			}
-			else{
+			else {
+				
+				int r = new Random().nextInt(100);
+				addObject(new leftHurdle(r , 500, 300, 50));
+				count2++;
+				
+				hurdleTimer = System.currentTimeMillis();
 				
 			}
+			
 		}
 		
 		
 		
-	} 
+		//if (System.currentTimeMillis() - hurdle2Timer >= hurdle2SpawnTime) {
+			
+			
+			
+			//int r = new Random().nextInt(100);
+			//addObject(new leftHurdle(r , 500, 300, 50));
+			
+			
+			//hurdle2Timer = System.currentTimeMillis();
+			
+			//}
+			
+		}
+		
+		
+		
+		
+		
+	
 		
 
 			

@@ -1,6 +1,7 @@
 /Boost.class
 /GameObject.class
 /GamePanel.class
+/Hurdle.class
 /ObjectManager.class
 /Pixel.png
 /PixelArt.png
@@ -13,12 +14,11 @@
 /boost2.png
 /image.png
 /image2.jpg
-/pixel2.jpg
-/rainbowdash.png
-/skigate.png
-/tree.png
-/Hurdle.class
-/rightskigate.png
-/skigate2.png
 /leftHurdle.class
 /leftskigate2.png
+/pixel2.jpg
+/rainbowdash.png
+/rightskigate.png
+/skigate.png
+/skigate2.png
+/tree.png
