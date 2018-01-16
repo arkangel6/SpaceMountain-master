@@ -5,6 +5,7 @@ public class Unicorn extends GameObject {
 	double yvel = 0.2;
 	double gravity = 1;
 	
+	public static boolean left = false;
 	ObjectManager manager;
 	int rightvalue;
 	public Unicorn(int x, int y, int width, int height) {
@@ -61,9 +62,14 @@ public class Unicorn extends GameObject {
 	void draw(Graphics g) {
 		// g.setColor(Color.YELLOW);
 		// g.fillRect(150, 0, 50, 50);
+		if(left) {
+			g.drawImage(GamePanel.unicorn2Img, x, y, width, height, null);	
+		}
+		else {
 		g.drawImage(GamePanel.unicornImg, x, y, width, height, null);
-		g.setColor(Color.yellow);
+		}
+		/*g.setColor(Color.yellow);
 		g.drawRect((int) collisionBox.getX(), (int) collisionBox.getY(), (int) collisionBox.getWidth(),
-				(int) collisionBox.getHeight());
+				(int) collisionBox.getHeight());*/
 	}
 }

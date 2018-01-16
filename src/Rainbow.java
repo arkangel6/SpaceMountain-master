@@ -19,18 +19,48 @@ public class Rainbow extends GameObject {
 	}
 
 	void draw(Graphics g) {
+		if(GamePanel.rainbowleft) {
+			g.setColor(Color.RED);
+			g.fillRect(x - 35, y, width , height);
+			
+			g.setColor(Color.ORANGE);
+			g.fillRect(x - 28, y, width, height);
+			
+			g.setColor(Color.YELLOW);
+			g.fillRect(x - 21, y, width, height);
+			
+			g.setColor(Color.GREEN);
+			g.fillRect(x - 14, y, width, height);
+			
+			g.setColor(Color.BLUE);
+			g.fillRect(x - 7, y, width, height);
+			
+			g.setColor(Color.MAGENTA);
+			g.fillRect(x , y, width * 2 / 3 , height);
+		}
+		else {
+			
 		g.setColor(Color.RED);
-		g.fillRect(x, y, width, height);
+		g.fillRect(x , y, width, height);
+		
 		g.setColor(Color.ORANGE);
 		g.fillRect(x - 7, y, width, height);
+		
 		g.setColor(Color.YELLOW);
 		g.fillRect(x - 14, y, width, height);
+		
 		g.setColor(Color.GREEN);
 		g.fillRect(x - 21, y, width, height);
+		
 		g.setColor(Color.BLUE);
 		g.fillRect(x - 28, y, width, height);
+		
 		g.setColor(Color.MAGENTA);
 		g.fillRect(x - 31, y, width * 2 / 3, height);
+		}
+		
+		
+		
 
 	}
 

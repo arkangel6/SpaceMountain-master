@@ -70,8 +70,8 @@ public class ObjectManager {
 		for (int i = 0; i < objects.size(); i++) {
 			GameObject o = objects.get(i);
 			o.draw(g);
-			g.setColor(Color.yellow);
-			g.drawRect((int)o.collisionBox.getX(), (int)o.collisionBox.getY(), (int)o.collisionBox.getWidth(), (int)o.collisionBox.getHeight());
+			//g.setColor(Color.yellow);
+			//g.drawRect((int)o.collisionBox.getX(), (int)o.collisionBox.getY(), (int)o.collisionBox.getWidth(), (int)o.collisionBox.getHeight());
 		}
 	}
 
@@ -301,6 +301,33 @@ public class ObjectManager {
 					
 				}
 			}
+			}
+		}
+	}
+	
+	public static boolean extra = false;
+	public void checkCollisionTrees() {
+		
+		for (int i = 0; i < objects.size(); i++) {
+			for (int j = i + 1; j < objects.size(); j++) {
+				
+			
+				GameObject o1 = objects.get(i);
+				GameObject o2 = objects.get(j);
+		
+		
+		
+		if(o1.collisionBox.intersects(o2.collisionBox)){
+			if((o1 instanceof Trees && o2 instanceof Projectile) ||
+			   (o2 instanceof Trees && o1 instanceof Projectile)){
+				rightskigate = true;
+				o1.isAlive = false;
+				o2.isAlive = false;
+			}
+		
+		
+		
+		}
 			}
 		}
 	}

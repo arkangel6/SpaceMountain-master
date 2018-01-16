@@ -33,14 +33,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int end = 2;
 	int current_state = menu;
 	static boolean scrollfast = false;
+	public static boolean rainbowleft = false;
+	Projectile projectile;
 	// GamePanel
 	public static BufferedImage unicornImg;
 	public static BufferedImage treeImg;
 	public static BufferedImage boostImg;
 	public static BufferedImage hurdleImg;
 	public static BufferedImage hurdleleftImg;
-	
-	
+	public static BufferedImage unicorn2Img;
+	int z = 0;
 	public GamePanel(int frameWidth, int frameHeight) {
 		this.frameHeight = frameHeight;
 		this.frameWidth = frameWidth;
@@ -58,6 +60,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 			treeImg = ImageIO.read(this.getClass().getResourceAsStream("tree.png"));
 			unicornImg = ImageIO.read(this.getClass().getResourceAsStream("rainbowdash.png"));
+			unicorn2Img = ImageIO.read(this.getClass().getResourceAsStream("rainbowdash2.png"));
 			boostImg = ImageIO.read(this.getClass().getResourceAsStream("boost2.png"));
 			hurdleImg = ImageIO.read(this.getClass().getResourceAsStream("rightskigate.png"));
 			hurdleleftImg = ImageIO.read(this.getClass().getResourceAsStream("leftskigate2.png"));
@@ -87,6 +90,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		manager.setScore(score++);
 		}
 		
+		if(ObjectManager.extra) {
+			for (int i = 0; i < 10; i++) {
+				manager.setScore(score++);
+				}
+				ObjectManager.extra = false;
+		}
+		
+		
+		
+		
+		
 		if(ObjectManager.rightskigate){
 			for (int i = 0; i < 10; i++) {
 			manager.setScore(score++);
@@ -101,7 +115,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		
 		//manager.setRight(right++);
-		manager.addObject(rainbow = new Rainbow(unicorn.x - 15 + x, unicorn.y - 5 + y, 10, 10));
+		
+		if(rainbowleft) {
+			z = -76;
+		}
+		else {
+			z = 3;
+		}
+		
+		manager.addObject(rainbow = new Rainbow(unicorn.x - z + x, unicorn.y - 5 + y, 10, 10));
+		
+		
+		
+		
 		if(scrollfast) {
 			scrollSpeed = 20;
 			yvel = 20;
@@ -113,6 +139,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		manager.checkCollision();
 		manager.checkCollisionHurdle();
+		manager.checkCollisionTrees();
 		if (unicorn.isAlive == false) {
 			current_state = end;
 			manager.reset(); 
@@ -187,6 +214,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if(ObjectManager.leftskigate){
 			g.setFont(new Font("Ariel", Font.BOLD, 50));
 			g.drawString("+300", 300, 200);
+		}
+		else{
+			g.drawString("      ", 500, 200);
+		}
+		
+		if(ObjectManager.extra){
+			g.setFont(new Font("Ariel", Font.BOLD, 50));
+			g.drawString("+300", 500, 200);
 		}
 		else{
 			g.drawString("      ", 500, 200);
@@ -300,7 +335,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			unicorn.update("left");
-			
+			Unicorn.left = true;
+			rainbowleft = true;
 			// x = x - 10;
 
 			/*
@@ -311,7 +347,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			unicorn.update("right");
-			
+			Unicorn.left = false;
+			rainbowleft = false;
 			// x = x + 10;
 
 			/*
@@ -322,11 +359,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_UP) {	
 			
 				
-				scrollSpeed = 20;
-				yvel = 20;
-				Trees.fast = true;
-				manager.fast2 = true;
-			
+			manager.addObject(projectile = new Projectile(unicorn.x + 30, unicorn.y + 25, 10,10));
 			
 			//y = y - 10;
 		}
