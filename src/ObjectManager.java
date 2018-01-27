@@ -320,7 +320,8 @@ public class ObjectManager {
 		if(o1.collisionBox.intersects(o2.collisionBox)){
 			if((o1 instanceof Trees && o2 instanceof Projectile) ||
 			   (o2 instanceof Trees && o1 instanceof Projectile)){
-				rightskigate = true;
+				//rightskigate = true;
+				extra = true;
 				o1.isAlive = false;
 				o2.isAlive = false;
 			}

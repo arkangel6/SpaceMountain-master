@@ -31,6 +31,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int menu = 0;
 	final int game = 1;
 	final int end = 2;
+	final int instruction = 3;
 	int current_state = menu;
 	static boolean scrollfast = false;
 	public static boolean rainbowleft = false;
@@ -176,6 +177,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// g.drawString("", 100, 300);
 
 	}
+	
+	void drawInstructionState(Graphics g) {
+		g.drawRect(0, 0, 800, 500);
+		g.setColor(Color.GREEN);
+		g.fillRect(0, 0, SpaceMountain.width, SpaceMountain.height);
+	}
 
 	void drawEndState(Graphics g) {
 		
@@ -236,6 +243,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			drawGameState(g);
 		} else if (current_state == end) {
 			drawEndState(g);
+		} else if(current_state == instruction) {
+			drawInstructionState(g);
 		}
 	}
 
@@ -248,6 +257,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateMenuState() {
 		manager.setScore(0);
+	}
+	
+	void updateInstructionState() {
+		
 	}
 
 	void updateEndState() {
@@ -296,6 +309,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		} else if (current_state == end) {
 			updateEndState();
 
+		} else if(current_state == instruction) {
+			updateInstructionState();
 		}
 
 	}
@@ -323,7 +338,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			
 
 		}
-		
+		if(e.getKeyCode() == KeyEvent.VK_2) {
+			
+			current_state = instruction;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_3) {
+			current_state = menu;
+		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			// Unicorn.update("space");
 			scrollSpeed = 1;
