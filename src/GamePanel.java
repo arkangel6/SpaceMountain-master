@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -43,6 +44,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static BufferedImage hurdleImg;
 	public static BufferedImage hurdleleftImg;
 	public static BufferedImage unicorn2Img;
+	public static BufferedImage menuscreenImg;
 	int z = 0;
 	public GamePanel(int frameWidth, int frameHeight) {
 		this.frameHeight = frameHeight;
@@ -65,8 +67,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			boostImg = ImageIO.read(this.getClass().getResourceAsStream("boost2.png"));
 			hurdleImg = ImageIO.read(this.getClass().getResourceAsStream("rightskigate.png"));
 			hurdleleftImg = ImageIO.read(this.getClass().getResourceAsStream("leftskigate2.png"));
-		} catch (Exception e) {
+			menuscreenImg = ImageIO.read(this.getClass().getResourceAsStream("finalmenu.png"));
 			System.out.println("no background image");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		timer.start();
@@ -169,9 +174,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawMenuState(Graphics g) {
-		g.drawRect(0, 0, 800, 500);
-		g.setColor(Color.BLUE);
-		g.fillRect(0, 0, SpaceMountain.width, SpaceMountain.height);
+		
+		g.drawImage(menuscreenImg, 0, -20, frameWidth, frameHeight, null);
+	
+		
 		// g.setFont(titleFont);
 		// g.setColor(Color.WHITE);
 		// g.drawString("", 100, 300);
@@ -197,7 +203,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("GAMEOVER :(", 120, 200);
 		
 		g.setFont(new Font("Ariel", Font.BOLD, 30));
-		g.drawString("Press 1 to play again", 200, 400);
+		g.drawString("Press 4 to play again", 200, 400);
 		
 	}
 	
@@ -333,10 +339,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (e.getKeyCode() == KeyEvent.VK_1) {
 
-				startagain();
+			//	startagain();
 				current_state = game;
 			
 
+		}
+		if(e.getKeyCode() == KeyEvent.VK_4) {
+			startagain();
+			current_state = game;
+		
+			
 		}
 		if(e.getKeyCode() == KeyEvent.VK_2) {
 			

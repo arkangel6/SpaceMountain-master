@@ -18,6 +18,9 @@ public class SpaceMountain {
 		setup();
 //http://pixelartmaker.com/art/164369d8c32ba0c.png
 		//http://pixelartmaker.com/art/164369d8c32ba0c
+		//http://pixelartmaker.com/art/d7576a1913ef78c
+		//http://pixelartmaker.com/art/e8a4c43be6344fd
+		//http://pixelartmaker.com/art/6c4c9ee3012e3d9
 	}
 
 	void setup() {
