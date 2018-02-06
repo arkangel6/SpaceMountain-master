@@ -16,11 +16,24 @@ public class SpaceMountain {
 		frame = new JFrame();
 		gamepanel = new GamePanel(width, height);
 		setup();
-//http://pixelartmaker.com/art/164369d8c32ba0c.png
+        //http://pixelartmaker.com/art/164369d8c32ba0c.png
 		//http://pixelartmaker.com/art/164369d8c32ba0c
+		
+		//press 1 to start
 		//http://pixelartmaker.com/art/d7576a1913ef78c
+		
 		//http://pixelartmaker.com/art/e8a4c43be6344fd
 		//http://pixelartmaker.com/art/6c4c9ee3012e3d9
+		
+		//gameover
+		//http://pixelartmaker.com/art/f1b9dcae65880f1
+		
+		//play again
+		//http://pixelartmaker.com/art/280d37795cf6c7a
+		
+		//instructions
+		//http://pixelartmaker.com/art/cb5c9e98551788e
+		
 	}
 
 	void setup() {

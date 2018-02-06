@@ -45,6 +45,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static BufferedImage hurdleleftImg;
 	public static BufferedImage unicorn2Img;
 	public static BufferedImage menuscreenImg;
+	public static BufferedImage endscreenImg;
+	public static BufferedImage instructionsImg;
+	
 	int z = 0;
 	public GamePanel(int frameWidth, int frameHeight) {
 		this.frameHeight = frameHeight;
@@ -68,6 +71,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			hurdleImg = ImageIO.read(this.getClass().getResourceAsStream("rightskigate.png"));
 			hurdleleftImg = ImageIO.read(this.getClass().getResourceAsStream("leftskigate2.png"));
 			menuscreenImg = ImageIO.read(this.getClass().getResourceAsStream("finalmenu.png"));
+			endscreenImg = ImageIO.read(this.getClass().getResourceAsStream("endscreen.png"));
+			instructionsImg = ImageIO.read(this.getClass().getResourceAsStream("instructions.png"));
+			
 			System.out.println("no background image");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -185,25 +191,33 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 	
 	void drawInstructionState(Graphics g) {
-		g.drawRect(0, 0, 800, 500);
-		g.setColor(Color.GREEN);
-		g.fillRect(0, 0, SpaceMountain.width, SpaceMountain.height);
+		//g.drawRect(0, 0, 800, 500);
+		//g.setColor(Color.GREEN);
+		//g.fillRect(0, 0, SpaceMountain.width, SpaceMountain.height);
+		g.drawImage(instructionsImg, 0, -15, frameWidth, frameHeight, null);
+		g.drawImage(boostImg, 55, 230, 60, 60, null);
+		//g.setColor(Color.YELLOW);
+		//g.drawString("press right arrow continiously to go right \n and left arrow continiously to go left and up arrow to shoot \n if you run into a tree you die \n if you run into a boost you go faster \n if you run past a skigate you get extra points", 20, 20);
 	}
 
 	void drawEndState(Graphics g) {
 		
-		g.drawRect(0, 0, 800, 500);
-		g.setColor(Color.red);
-		g.fillRect(0, 0, SpaceMountain.width, SpaceMountain.height);
-		g.setColor(Color.BLACK);
-		g.setFont(new Font("Ariel", Font.BOLD, 40));
-		g.drawString("SCORE: " + manager.getScore(), 250, 300);
-		g.setColor(Color.BLACK);
-		g.setFont(new Font("Ariel", Font.BOLD, 80));
-		g.drawString("GAMEOVER :(", 120, 200);
+		//g.drawRect(0, 0, 800, 500);
+		//g.setColor(Color.red);
+		//g.fillRect(0, 0, SpaceMountain.width, SpaceMountain.height);
 		
-		g.setFont(new Font("Ariel", Font.BOLD, 30));
-		g.drawString("Press 4 to play again", 200, 400);
+		//g.setColor(Color.BLACK);
+		//g.setFont(new Font("Ariel", Font.BOLD, 80));
+		//g.drawString("GAMEOVER :(", 120, 200);
+		
+		//g.setFont(new Font("Ariel", Font.BOLD, 30));
+		//g.drawString("Press 4 to play again", 200, 400);
+		
+		g.drawImage(endscreenImg, 0, -20, frameWidth, frameHeight, null);
+		
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("Monospace", Font.BOLD, 40));
+		g.drawString("SCORE: " + manager.getScore(), 250, 350);
 		
 	}
 	
@@ -214,7 +228,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// unicorn = new Unicorn(150, 20, 50, 50);
 		manager.draw(g);
 		g.setColor(Color.BLACK);
-		g.setFont(new Font("Ariel", Font.PLAIN, 20));
+		g.setFont(new Font("Monospace", Font.PLAIN, 20));
 		g.drawString("SCORE: " + manager.getScore(), 600, 30);
 		
 		if(ObjectManager.rightskigate){
@@ -339,7 +353,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (e.getKeyCode() == KeyEvent.VK_1) {
 
-			//	startagain();
+			 	//startagain();
 				current_state = game;
 			
 
