@@ -28,9 +28,9 @@ public class Unicorn extends GameObject {
 			manager.setRight(rightvalue++);
 			
 			
-				x = x + manager.getRight();
+				//x = x + manager.getRight();
 			
-			
+			x = x+10;
 			
 			
 			/*x += yvel;

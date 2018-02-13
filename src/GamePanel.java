@@ -195,7 +195,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		//g.setColor(Color.GREEN);
 		//g.fillRect(0, 0, SpaceMountain.width, SpaceMountain.height);
 		g.drawImage(instructionsImg, 0, -15, frameWidth, frameHeight, null);
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("Monospace", Font.BOLD, 25));
+		g.drawString("go right", 200, 110);
+		g.drawString("go left", 200, 150);
+		g.drawString("shoot", 200, 210);
+		g.drawString("go faster", 200, 270);
+		g.drawString("bonus points", 200, 340);
+		g.drawString("avoid", 200, 385);
 		g.drawImage(boostImg, 55, 230, 60, 60, null);
+		g.drawImage(hurdleImg, 45, 295, 490, 57, null);
+		g.drawImage(hurdleleftImg, -370, 315, 490, 57, null);
+		g.drawImage(treeImg, 55, 355, 55, 55, null);
 		//g.setColor(Color.YELLOW);
 		//g.drawString("press right arrow continiously to go right \n and left arrow continiously to go left and up arrow to shoot \n if you run into a tree you die \n if you run into a boost you go faster \n if you run past a skigate you get extra points", 20, 20);
 	}
